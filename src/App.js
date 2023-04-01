@@ -51,7 +51,7 @@ function App() {
         <Button variant="contained" onClick={fetchInfo}>
           Refresh
         </Button>
-        <p>Last refreshed at {lastrefreshed}</p>
+        <p>Last Refreshed at {lastrefreshed}</p>
       </Box>
       {info.map((s) => (
         <Paper variant="outlined" elevation={2}>
