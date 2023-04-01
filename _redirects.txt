@@ -1,5 +1,0 @@
-# Redirects from what the browser requests to what we serve
-
-/api/* http://endpoint.com/api/:splat 200!
-http://13.233.40.50:5000/*  http://13.233.40.50:5000/:splat 200!
-/5000/*  http://13.233.40.50:5000:splat 200!

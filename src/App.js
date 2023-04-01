@@ -22,7 +22,7 @@ function App() {
 
   const fetchInfo = async () => {
     try {
-      const res = await axios.get("http://13.233.40.50:5000/");
+      const res = await axios.get("https://13.233.40.50:5000/");
       console.log("response", res.data);
       SetInfo(res.data);
       toast.success("Refreshed!", {
