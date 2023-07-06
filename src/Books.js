@@ -93,7 +93,7 @@ function Books() {
   const fetchTradebook = async () => {
     try {
       const res = await axios.get(
-        "https://3ccbb7e9b8c5.ngrok.app/gettradebookblaze",
+        `${process.env.REACT_APP_NGROK_URL}/gettradebookblaze`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -131,7 +131,7 @@ function Books() {
   const fetchOrderbook = async () => {
     try {
       const res = await axios.get(
-        "https://3ccbb7e9b8c5.ngrok.app/getorderbookblaze",
+        `${process.env.REACT_APP_NGROK_URL}/getorderbookblaze`,
         {
           headers: {
             "Content-Type": "application/json",

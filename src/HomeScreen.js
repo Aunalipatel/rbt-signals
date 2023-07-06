@@ -109,7 +109,7 @@ function HomeScreen() {
     console.log(payload);
     try {
       const res = await axios.post(
-        "https://0514e4fa0239.ngrok.app/resumelivetrading",
+        `${process.env.REACT_APP_NGROK_URL}/resumelivetrading`,
         // "http://localhost:5000/resumelivetrading",
         payload,
         headers
@@ -145,7 +145,7 @@ function HomeScreen() {
   const pauselivetrading = async () => {
     try {
       const res = await axios.post(
-        "https://0514e4fa0239.ngrok.app/pauselivetrading"
+        `${process.env.REACT_APP_NGROK_URL}/pauselivetrading`
         // "http://localhost:5000/pauselivetrading"
       );
       console.log("response", res.data);
@@ -178,7 +178,7 @@ function HomeScreen() {
 
   const fetchInfo = async () => {
     try {
-      const res = await axios.get("https://0514e4fa0239.ngrok.app");
+      const res = await axios.get(`${process.env.REACT_APP_NGROK_URL}`);
       console.log("response", res.data);
       SetInfo(res.data);
       toast.success("Refreshed!", {
@@ -214,7 +214,7 @@ function HomeScreen() {
   const fetchTradelist = async () => {
     try {
       const res = await axios.get(
-        "https://0514e4fa0239.ngrok.app/gettradelist"
+        `${process.env.REACT_APP_NGROK_URL}/gettradelist`
       );
       console.log("response", res.data);
       SetTradelist(res.data);
@@ -249,7 +249,9 @@ function HomeScreen() {
     try {
       handleClose();
 
-      const res = await axios.get("https://0514e4fa0239.ngrok.app/killswitch");
+      const res = await axios.get(
+        `${process.env.REACT_APP_NGROK_URL}/killswitch`
+      );
       console.log("response from killswitch", res.data);
 
       toast.success(
