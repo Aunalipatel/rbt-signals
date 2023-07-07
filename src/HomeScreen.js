@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { GoDotFill } from "react-icons/go";
 
 const darkTheme = createTheme({
   palette: {
@@ -431,8 +432,27 @@ function HomeScreen() {
                 <td> {s.Signal}</td>
                 <td> {s.Ticker}</td>
                 <td> {s.Signal === "No Signal" ? "-" : s.Direction}</td>
-                <td> {s.Lots1}</td>
-                <td> {s.Lots2}</td>
+                <td>
+                  {s.Live_Trade1 === false ? (
+                    <GoDotFill style={{ color: "red" }} />
+                  ) : s.Live_Trade1 === true ? (
+                    <GoDotFill style={{ color: "lightgreen" }} />
+                  ) : (
+                    ""
+                  )}
+                  {s.Lots1}
+                </td>
+
+                <td>
+                  {s.Live_Trade2 === false ? (
+                    <GoDotFill style={{ color: "red" }} />
+                  ) : s.Live_Trade2 === true ? (
+                    <GoDotFill style={{ color: "lightgreen" }} />
+                  ) : (
+                    ""
+                  )}
+                  {s.Lots2}
+                </td>
                 <td>{s.Signal === "No Signal" ? "-" : s.EntryDateTime}</td>
                 <td>{s.Signal === "No Signal" ? "-" : s.EntryPrice}</td>
                 <td>
