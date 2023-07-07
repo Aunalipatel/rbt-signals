@@ -37,28 +37,53 @@ function HomeScreen() {
   const [openlive, setOpenlive] = useState(false);
   const [openpause, setOpenpause] = useState(false);
 
-  const strategies = [1, 2, 3.1, 3.2, 4, 5, 6, 7, 8, 9, 10];
+  const strategies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-  const [checked, setChecked] = useState([
+  const [checkedresume, setCheckedresume] = useState([
     false, //1
-    false,
-    false, //3.1
-    false, //3.2
+    false, //2
+    false, //3
     false, //4
     false, //5
-    false,
-    false,
-    false,
+    false, //6
+    false, //7
+    false, //8
     false, //9
     false, //10
+    false, //11
+    false, //12
   ]);
 
-  const handleCheck = (n) => {
-    const updatedChecked = checked.map((item, index) =>
+  const [checkedpause, setCheckedpause] = useState([
+    false, //1
+    false, //2
+    false, //3
+    false, //4
+    false, //5
+    false, //6
+    false, //7
+    false, //8
+    false, //9
+    false, //10
+    false, //11
+    false, //12
+  ]);
+
+  const handleCheckresume = (n) => {
+    const updatedCheckedresume = checkedresume.map((item, index) =>
       index === n ? !item : item
     );
 
-    setChecked(updatedChecked);
+    setCheckedresume(updatedCheckedresume);
+    console.log(n);
+  };
+
+  const handleCheckpause = (n) => {
+    const updatedCheckedpause = checkedpause.map((item, index) =>
+      index === n ? !item : item
+    );
+
+    setCheckedpause(updatedCheckedpause);
     console.log(n);
   };
 
@@ -105,7 +130,7 @@ function HomeScreen() {
   //
 
   const resumelivetrading = async () => {
-    let payload = { msg: checked };
+    let payload = { msg: checkedresume };
     let headers = { "Content-Type": "application/json" };
     console.log(payload);
     try {
@@ -144,14 +169,18 @@ function HomeScreen() {
   };
 
   const pauselivetrading = async () => {
+    let payload = { msg: checkedpause };
+    let headers = { "Content-Type": "application/json" };
+    console.log(payload);
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_NGROK_URL}/pauselivetrading`
-        // "http://localhost:5000/pauselivetrading"
+        `${process.env.REACT_APP_NGROK_URL}/pauselivetrading`,
+        payload,
+        headers
       );
       console.log("response", res.data);
       handleClosepause();
-      toast.error("Live Trading has been PAUSED", {
+      toast.error("Live Trading has been PAUSED for the selected strategies", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: true,
@@ -367,8 +396,8 @@ function HomeScreen() {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={checked[index]}
-                          onChange={() => handleCheck(index)}
+                          checked={checkedresume[index]}
+                          onChange={() => handleCheckresume(index)}
                         />
                       }
                       label={"Strategy  " + String(strategies[index])}
@@ -397,9 +426,25 @@ function HomeScreen() {
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                Signals will continue to be generated but no trades will be
-                taken from Client account
+                Select strategies for which live trading needs to be paused
+                (signals will continue to be generated)
               </DialogContentText>
+              {strategies.map(({ st }, index) => {
+                return (
+                  <div>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={checkedpause[index]}
+                          onChange={() => handleCheckpause(index)}
+                        />
+                      }
+                      label={"Strategy  " + String(strategies[index])}
+                    />
+                    <br />
+                  </div>
+                );
+              })}
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClosepause}>Don't Proceed</Button>
